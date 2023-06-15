@@ -11,11 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-<form class="form-inline" method="post" action="/calculate/result">
+<form class="form-inline" method="post" action="/calculate">
 
   <div class="form-group">
     <label for="1">USD</label>
-    <input type="text" name="usd" id="1" class="form-control" value="${usd}" aria-describedby="helpId">
+    <input type="number" name="money" id="1" class="form-control" value="${money}" aria-describedby="helpId">
   </div>
   <button type="submit" class="btn btn-primary">Convert</button>
 </form>
