@@ -2,7 +2,7 @@ package com.example.calculate.controller.service.impl;
 
 import com.example.calculate.controller.service.IConvertMoneyService;
 import org.springframework.stereotype.Service;
-
+@Service
 public class ConvertMoneyService implements IConvertMoneyService  {
 
     @Override
