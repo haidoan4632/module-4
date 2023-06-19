@@ -23,6 +23,7 @@
       <tr>
         <td>
         <form:select path="languages">
+          <form:option value="${program.languages}"></form:option>
           <form:option value="English"></form:option>
           <form:option value="Vietnamese"></form:option>
           <form:option value="Japanese"></form:option>
@@ -34,6 +35,7 @@
         <td>
           <form:label path="pageSize">Page Size : </form:label>
           Show <form:select path="pageSize">
+          <form:option value="${program.pageSize}"></form:option>
           <form:option value="5"></form:option>
           <form:option value="10"></form:option>
           <form:option value="15"></form:option>
@@ -52,7 +54,7 @@
       <tr>
         <td>
           <form:label path="signature">Signature : </form:label>
-          <form:textarea type="text" path="signature"/>
+          <form:textarea type="text"  path="signature"/>
         </td>
       </tr>
       <tr>

@@ -19,7 +19,7 @@ public class ProgramController {
     }
     @GetMapping("update-form")
     public String getFormUpdate(Model model) {
-        model.addAttribute("program", new Program());
+        model.addAttribute("program", iProgramService.getProgram());
         return "update";
     }
 
