@@ -8,17 +8,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class SanwichController {
-    @GetMapping("/a")
+    @GetMapping("/")
     public String list() {
         return "list";
     }
+
     @GetMapping("/b")
-    public String list(@RequestParam String[] name, RedirectAttributes redirectAttributes){
-        String str= "";
-        for (String s: name) {
-            str += s +"<br>";
+    public String list(@RequestParam(required = false) String[] name, RedirectAttributes redirectAttributes) {
+        String str = "";
+        if (name == null) {
+            str = "Bạn chưa chọn gia vị";
+        } else {
+            for (String s : name) {
+                str += s + "<br>";
+            }
         }
         redirectAttributes.addFlashAttribute("ten", str);
-        return "redirect:/a";
+        return "redirect:/";
     }
 }

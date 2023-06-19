@@ -25,12 +25,11 @@
 </form>
 
 
-    <c:if test="${ten!=null}">
+
 <form>
-    Danh sách gia vị đi kèm:
-        <p>${ten}</p>
+        <p>  Danh sách gia vị đi kèm: ${ten}</p>
 </form>
-    </c:if>
+
 
 
 </body>
