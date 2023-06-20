@@ -25,9 +25,9 @@ public class ProductController {
         model.addAttribute("product",new Product());
         return "/create";
     }
-    @GetMapping("/{id}/detail")
+    @GetMapping("/detail/{id}")
     public String view(@PathVariable int id, Model model) {
-        model.addAttribute("product", iProductService.findById(id));
+        model.addAttribute("products", iProductService.findById(id));
         return "/detail";
     }
     @PostMapping("create1")

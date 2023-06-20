@@ -40,10 +40,9 @@
         <td th:text="${product.describe}"></td>
         <td th:text="${product.producer}"></td>
 
-<!--        <td><a class="btn btn-primary" th:href="@{/{id}/update(id=${product.id})}">update</a></td>-->
         <td>  <a th:href="@{/update/{id}(id=${product.id})}">Update</a></td>
         <td>  <a th:href="@{/delete/{id}(id=${product.id})}">Delete</a></td>
-<!--        <td><a class="btn btn-primary" th:href="@{/product/{id}/detail(id=${object.id})}">detail</a></td>-->
+        <td>  <a th:href="@{/detail/{id}/(id=${product.id})}">detail</a></td>
     </tr>
     </tbody>
 </table>
