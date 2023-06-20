@@ -9,7 +9,7 @@
 </head>
 <body class="container">
 <h2>NEW PRODUCT</h2>
-<form action="create1" method="post" th:object="${product}">
+<form action="/create1" method="post" th:object="${product}">
     <div class="input-group">
         <label for="id">ID</label>
         <input id="id" type="number" th:field="*{id}">

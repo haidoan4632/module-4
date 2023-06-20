@@ -11,8 +11,8 @@
 <h3 style="text-align: center">MANAGER PRODUCT</h3>
 <a href="create-form">Create new product</a>
 <br>
-<form th:action="@{product/search}" method="get">
-    <input type="text" name="name" th:text="${name}">
+<form th:action="@{search}" method="get">
+    <input type="text" name="nameProduct">
     <button type="submit">Search</button>
 </form>
 <br>

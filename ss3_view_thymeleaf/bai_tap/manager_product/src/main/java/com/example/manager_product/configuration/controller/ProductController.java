@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/")
 public class ProductController {
     @Autowired
     private IProdcutService iProductService;
@@ -40,7 +41,8 @@ public class ProductController {
         model.addAttribute("products", iProductService.findById(id));
         return "/update";
     }
-    @PostMapping("update1")
+
+    @PostMapping("update")
     public String update(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         iProductService.update(product.getId(), product);
         redirectAttributes.addFlashAttribute("mess", "Update successful!");
@@ -56,8 +58,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public String listSearch(@PathVariable String name, Model model) {
-        model.addAttribute("product", iProductService.findByName(name));
-        return "redirect:/";
+    public String listSearch(@RequestParam(value = "nameProduct") String name, Model model) {
+        model.addAttribute("products", iProductService.findByName(name));
+        return "/list";
     }
 }
