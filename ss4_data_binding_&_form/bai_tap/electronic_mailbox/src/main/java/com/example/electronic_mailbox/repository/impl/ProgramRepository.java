@@ -2,8 +2,9 @@ package com.example.electronic_mailbox.repository.impl;
 
 import com.example.electronic_mailbox.model.Program;
 import com.example.electronic_mailbox.repository.IProgramRepository;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class ProgramRepository implements IProgramRepository {
     private Program program = new Program("English", 5, false, "Thor");
     @Override
