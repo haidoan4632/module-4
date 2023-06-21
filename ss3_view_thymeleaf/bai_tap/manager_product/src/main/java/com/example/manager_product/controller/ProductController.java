@@ -6,6 +6,7 @@ import com.example.manager_product.service.IProdcutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,16 +26,30 @@ public class ProductController {
         model.addAttribute("product",new Product());
         return "/create";
     }
-//    @GetMapping("/detail/{id}")
-//    public String view(@PathVariable int id, Model model) {
-//        model.addAttribute("products", iProductService.findById(id));
-//        return "/detail";
-//    }
+    @GetMapping("/detail/{id}")
+    public String view(@PathVariable int id, Model model) {
+
+        if (iProductService.findById(id)!=null){
+            model.addAttribute("products", iProductService.findById(id));
+            model.addAttribute("mess", "Found id. ");
+            return "/detail";
+        }
+        else {
+            model.addAttribute("mess", "Not found id. ");
+            return "redirect:/";
+        }
+
+    }
     @PostMapping("create1")
-    public String create(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
-        iProductService.save(product);
-        redirectAttributes.addFlashAttribute("mess", "Add successful!");
-        return "redirect:/";
+    public String create(@ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+       if (bindingResult.hasErrors()){
+           redirectAttributes.addFlashAttribute("mess", "Add not successful!");
+           return "redirect:/";
+       }else {
+           iProductService.save(product);
+           redirectAttributes.addFlashAttribute("mess", "Add successful!");
+           return "redirect:/";
+       }
     }
     @GetMapping("/update/{id}")
     public String update(@PathVariable int id, Model model) {
