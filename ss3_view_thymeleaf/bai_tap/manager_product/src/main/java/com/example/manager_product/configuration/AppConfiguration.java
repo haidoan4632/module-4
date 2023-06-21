@@ -16,7 +16,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.example.manager_product.configuration")
+@ComponentScan("com.example.manager_product")
 public class AppConfiguration implements WebMvcConfigurer,  ApplicationContextAware {
 
     private ApplicationContext applicationContext;
