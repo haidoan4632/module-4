@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProgramService implements IProgramService {
 @Autowired
-IProgramRepository iProgramRepository;
+private IProgramRepository iProgramRepository;
     @Override
     public Program getProgram() {
         return iProgramRepository.getProgram();
