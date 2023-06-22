@@ -9,9 +9,9 @@
 </head>
 <body class="container">
 <h3 style="text-align: center">MANAGER PRODUCT</h3>
-<a href="create-form">Create new product</a>
+<a href="/product/create-form">Create new product</a>
 <br>
-<form th:action="@{search}" method="get">
+<form th:action="@{/product/search}" method="get">
     <input type="text" name="nameProduct">
     <button type="submit">Search</button>
 </form>
@@ -40,9 +40,9 @@
         <td th:text="${product.describe}"></td>
         <td th:text="${product.producer}"></td>
 
-        <td>  <a th:href="@{/update/{id}(id=${product.id})}">Update</a></td>
-        <td>  <a th:href="@{/delete/{id}(id=${product.id})}">Delete</a></td>
-        <td>  <a th:href="@{/detail/{id}/(id=${product.id})}">detail</a></td>
+        <td>  <a th:href="@{/product/update/{id}(id=${product.id})}">Update</a></td>
+        <td>  <a th:href="@{/product/delete/{id}(id=${product.id})}">Delete</a></td>
+        <td>  <a th:href="@{/product/detail/{id}/(id=${product.id})}">detail</a></td>
     </tr>
     </tbody>
 </table>

@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProdcutService iProductService;
 
-    @GetMapping("/")
+    @GetMapping()
     public String display(Model model) {
         model.addAttribute("products",iProductService.getAll());
         return "/list";
     }
-    @GetMapping("create-form")
+    @GetMapping("/create-form")
     public String createForm(Model model) {
         model.addAttribute("product",new Product());
         return "/create";
@@ -40,15 +40,15 @@ public class ProductController {
         }
 
     }
-    @PostMapping("create1")
+    @PostMapping("/create1")
     public String create(@ModelAttribute Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
        if (bindingResult.hasErrors()){
            redirectAttributes.addFlashAttribute("mess", "Add not successful!");
-           return "redirect:/";
+           return "redirect:/product";
        }else {
            iProductService.save(product);
            redirectAttributes.addFlashAttribute("mess", "Add successful!");
-           return "redirect:/";
+           return "redirect:/product";
        }
     }
     @GetMapping("/update/{id}")
@@ -60,15 +60,15 @@ public class ProductController {
         else {
             String message = "not found id";
             model.addAttribute("mess",message);
-            return "redirect:/";
+            return "redirect:/product";
         }
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
     public String update(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         iProductService.update(product.getId(), product);
         redirectAttributes.addFlashAttribute("mess", "Update successful!");
-        return "redirect:/";
+        return "redirect:/product";
     }
 
     @GetMapping("/delete/{id}")
@@ -77,12 +77,12 @@ public class ProductController {
             iProductService.delete(id);
             String message = "delete success";
             redirectAttributes.addFlashAttribute("mess", message);
-            return "redirect:/";
+            return "redirect:/product";
         }
         else {
             String message = "delete not success";
             redirectAttributes.addFlashAttribute("mess", message);
-            return "redirect:/";
+            return "redirect:/product";
         }
     }
 
