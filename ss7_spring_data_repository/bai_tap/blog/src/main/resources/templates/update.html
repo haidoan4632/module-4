@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/add}" method="post" th:object="${blog}">
+    <table>
+        <tr>
+            <td><label>Title: </label></td>
+            <td><input type="text" th:field="*{title}"></td>
+        </tr>
+        <tr>
+            <td><label>Heading: </label></td>
+            <td><input type="text" th:field="*{heading}"></td>
+        </tr>
+        <tr>
+            <td><label>Date Submitted: </label></td>
+            <td><input type="date" th:field="*{dateSubmitted}"></td>
+        </tr>
+        <tr>
+            <td><label>Content</label></td>
+            <td><textarea th:field="*{content}"></textarea></td>
+        </tr>
+        <tr>
+            <td><a th:href="@{/}">back</a></td>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 class="text-center">Detail Blog</h1>
+<table class="table container" th:object="${blogList}">
+    <tr class="text-center">
+        <th>#</th>
+        <th>Title</th>
+        <th>Heading</th>
+        <th>Date Submitted</th>
+        <th>Content</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr class="text-center">
+        <td th:text="${blogList.id}"></td>
+        <td th:text="${blogList.title}"></td>
+        <td th:text="${blogList.heading}"></td>
+        <td th:text="${blogList.dateSubmitted}"></td>
+        <td th:text="${blogList.content}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${blogList.id})}">
+                <button>Edit</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/delete/{id}(id=${blogList.id})}">
+                <button>Delete</button>
+            </a>
+        </td>
+    </tr>
+</table>
+
+
+
+</body>
+</html>
