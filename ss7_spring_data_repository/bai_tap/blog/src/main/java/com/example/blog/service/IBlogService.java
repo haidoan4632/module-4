@@ -1,15 +1,17 @@
 package com.example.blog.service;
 
+
 import com.example.blog.model.Blog;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import java.util.List;
 
 public interface IBlogService {
-    List<Blog> displayBlog();
-    void createBlog(Blog blog);
-    void editBlog(Blog blog);
-    Blog detailBlog(Integer id);
-    boolean deleteBlog(Blog blog);
+    List<Blog> findAll();
 
+    void create(Blog blog);
 
+    Blog findById(Integer id);
+
+    boolean update(Blog blog);
+
+    boolean remove(int id);
 }
