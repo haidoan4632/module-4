@@ -13,7 +13,7 @@ public class BlogService implements IBlogService {
 
     @Override
     public List<Blog> findAll() {
-        return blogRepository.findAll();
+        return blogRepository.findAllByIsFlag();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class BlogService implements IBlogService {
 
     @Override
     public boolean remove(int id) {
-        blogRepository.deleteById(id);
+        blogRepository.deleteByIsFlag(id);
         return true;
     }
 }

@@ -12,18 +12,19 @@
     <div class="input-group">
 
 
-    Tiêu đề: <input type="text" th:field="*{nameBlog}">
-    <br>
-    <br>
-    Nội dung: <input type="text" th:field="*{content}">
-    <br>
-    <br>
-    Ngày đăng: <input type="date" th:field="*{date}">
-    <br>
-    <br>
-    Tác giả: <input type="text" th:field="*{author}">
-    <br>
-    <br>
+        Name Blog: <input type="text" th:field="*{nameBlog}">
+        <br>
+        <br>
+        Content: <input type="text" th:field="*{content}">
+        <br>
+        <br>
+        Date: <input type="date" th:field="*{date}">
+        <br>
+        <br>
+        Author: <input type="text" th:field="*{author}">
+        <br>
+        Name Category: <input type="text" th:field="*{category.nameCategory}">
+        <br>
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>

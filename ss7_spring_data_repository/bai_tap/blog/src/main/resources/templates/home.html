@@ -18,6 +18,7 @@
         <th>Content</th>
         <th>date</th>
         <th>author</th>
+        <th>nam category</th>
         <th>Delete</th>
         <th>Update</th>
         <th>Remove</th>
@@ -30,6 +31,9 @@
         <td th:text="${blog.content}"></td>
         <td th:text="${blog.date}"></td>
         <td th:text="${blog.author}"></td>
+        <td th:text="${blog.category.nameCategory}"></td>
+
+
         <td><a th:href="@{/blog/delete/{id}(id=${blog.id})}">Delete</a></td>
         <td><a th:href="@{/blog/update/{id}(id=${blog.id})}">Update</a></td>
         <td><a th:href="@{/blog/detail/{id}(id=${blog.id})}">Detail</a></td>

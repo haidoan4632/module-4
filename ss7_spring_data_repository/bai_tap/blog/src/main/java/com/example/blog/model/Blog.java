@@ -12,18 +12,32 @@ public class Blog {
     private String content;
     private String date;
     private String author;
+    private boolean flag;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id",nullable = false)
+    private Category category;
 
     public Blog() {
     }
 
-    public Blog(int id, String nameBlog, String content, String date, String author) {
+    public Blog(int id, String nameBlog, String content, String date, String author, boolean flag, Category category) {
         this.id = id;
         this.nameBlog = nameBlog;
         this.content = content;
         this.date = date;
         this.author = author;
+        this.flag = flag;
+        this.category = category;
     }
-
+    public Blog( String nameBlog, String content, String date, String author, boolean flag, Category category) {
+        this.nameBlog = nameBlog;
+        this.content = content;
+        this.date = date;
+        this.author = author;
+        this.flag = flag;
+        this.category = category;
+    }
     public int getId() {
         return id;
     }
@@ -62,6 +76,22 @@ public class Blog {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 
