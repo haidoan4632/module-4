@@ -4,47 +4,39 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "categorys")
+@Table(name = "category")
 public class Category {
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_category;
-   @Column(name = "name_category",unique = true,nullable = false)
-    private String nameCategory;
-
-   @OneToMany(mappedBy = "category")
-    private List<Blog> blogList;
+    private Integer id;
+    private String name;
+    @OneToMany(mappedBy = "category")
+    private List<Blog> blogs;
 
     public Category() {
     }
 
-    public Category(Integer id_category, String nameCategory, List<Blog> blogList) {
-        this.id_category = id_category;
-        this.nameCategory = nameCategory;
-        this.blogList = blogList;
+    public int getId() {
+        return id;
     }
 
-    public Integer getId_category() {
-        return id_category;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setId_category(Integer id_category) {
-        this.id_category = id_category;
+    public String getName() {
+        return name;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public List<Blog> getBlogs() {
+        return blogs;
     }
 
-    public List<Blog> getBlogList() {
-        return blogList;
-    }
-
-    public void setBlogList(List<Blog> blogList) {
-        this.blogList = blogList;
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 }

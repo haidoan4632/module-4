@@ -1,22 +1,21 @@
 package com.example.blog.repository;
 
 import com.example.blog.model.Blog;
+import com.example.blog.model.Category;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.awt.print.Pageable;
 
 
-@Repository
     public interface IBlogRepository extends JpaRepository<Blog, Integer> {
-        @Query(value = "select * from blocks join categorys where blocks.flag = false", nativeQuery = true)
-        List<Blog> findAllByIsFlag();
-@Modifying
-@Transactional
-    @Query(value = "UPDATE blocks SET  flag = true where id=?1", nativeQuery = true)
-     void deleteByIsFlag(Integer id);
+        Page<Blog> findBlogByTitleContainsAndCategory( String title, Category category ,Pageable pageable );
+        @Modifying
+        @Transactional
+        @Query(value = "update blog as b set is_flag_delete = 1 where b.id = :id ", nativeQuery = true)
+        void isDelete(@Param(value = "id") Integer id);
 }

@@ -3,41 +3,31 @@ package com.example.blog.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "blocks")
+@Table(name = "blogs")
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String nameBlog;
     private String content;
     private String date;
-    private String author;
-    private boolean flag;
-
     @ManyToOne
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "category.id", nullable = false)
     private Category category;
+    private boolean isFlagDelete;
 
     public Blog() {
     }
 
-    public Blog(int id, String nameBlog, String content, String date, String author, boolean flag, Category category) {
+    public Blog(int id, String nameBlog, String content, String date, Category category, boolean isFlagDelete) {
         this.id = id;
         this.nameBlog = nameBlog;
         this.content = content;
         this.date = date;
-        this.author = author;
-        this.flag = flag;
         this.category = category;
+        this.isFlagDelete = isFlagDelete;
     }
-    public Blog( String nameBlog, String content, String date, String author, boolean flag, Category category) {
-        this.nameBlog = nameBlog;
-        this.content = content;
-        this.date = date;
-        this.author = author;
-        this.flag = flag;
-        this.category = category;
-    }
+
     public int getId() {
         return id;
     }
@@ -70,22 +60,6 @@ public class Blog {
         this.date = date;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
     public Category getCategory() {
         return category;
     }
@@ -93,5 +67,12 @@ public class Blog {
     public void setCategory(Category category) {
         this.category = category;
     }
-}
 
+    public boolean isFlagDelete() {
+        return isFlagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        isFlagDelete = flagDelete;
+    }
+}
