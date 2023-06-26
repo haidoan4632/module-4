@@ -13,10 +13,6 @@
 <h2>NEW BLOG</h2>
 <form action="/blogs" method="post" th:object="${blogs}">
     <div class="input-group">
-        <label for="id">ID</label>
-        <input type="hidden"
-               class="form-control" name="" id="id" aria-describedby="helpId" placeholder="input id new blog"
-               th:field="*{id}">
         <label for="nameBlog">NAME BLOG</label>
         <input type="text"
                class="form-control" name="" id="nameBlog" aria-describedby="helpId" placeholder="input name new blog"
@@ -30,11 +26,14 @@
                class="form-control" name="" id="date" aria-describedby="helpId"
                placeholder="input describe new product" th:field="*{date}">
         <label for="date">CATEGORY</label>
-        <select th:field="*{category}">
-            <option th:each="blog :${category}" th:value="${blog.getId()}">
-                <p th:text="${blog.getName()}"></p>
-            </option>
-        </select>
+        <div class="input-group">
+            <label >Category</label>
+            <select th:field="*{category}">
+                <option th:each="blog :${categories}" th:value="${blog.getId()}">
+                    <p th:text="${blog.getName()}"></p>
+                </option>
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
