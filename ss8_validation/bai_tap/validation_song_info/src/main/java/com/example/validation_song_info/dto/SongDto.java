@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class SongDto implements Validator {
-    private int id;
+    private Integer id;
     @NotNull
     @Size(max = 800)
     @Pattern(regexp = "^[\\w ]+$", message = "Không chứa ký tự đặc biệt")
@@ -25,18 +25,18 @@ public class SongDto implements Validator {
     public SongDto() {
     }
 
-    public SongDto(int id, String name, String singer, String kindOfMusic) {
+    public SongDto(Integer id, String name, String singer, String kindOfMusic) {
         this.id = id;
         this.name = name;
         this.singer = singer;
         this.kindOfMusic = kindOfMusic;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

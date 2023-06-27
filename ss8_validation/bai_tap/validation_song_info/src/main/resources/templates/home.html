@@ -24,10 +24,10 @@
     <td th:text="${songs.singer}"></td>
     <td th:text="${songs.kindOfMusic}"></td>
     <td>
-        <button class="btn btn-warning"><a class="text-white text-decoration-none" th:href="@{/songs/{id}/update(id=${songs.id})}">Update</a></button>
+        <button class="btn btn-warning"><a class="text-white text-decoration-none" th:href="@{/songs/update/{id}(id=${songs.getId()})}">Update</a></button>
     </td>
     <td>
-        <button class="btn btn-warning"><a class="text-white text-decoration-none" th:href="@{/songs/delete/{id}(id=${songs.id})}">Delete</a></button>
+        <button class="btn btn-warning"><a class="text-white text-decoration-none" th:href="@{/songs/delete/{id}(id=${songs.getId()})}">Delete</a></button>
     </td>
 
 </tr>

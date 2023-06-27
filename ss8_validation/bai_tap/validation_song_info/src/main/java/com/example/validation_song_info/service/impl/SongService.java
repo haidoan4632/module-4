@@ -16,7 +16,7 @@ public class SongService implements ISongService {
 
     @Override
     public List<Song> display() {
-        return songRepository.findAll();
+        return songRepository.findAllByFlagDeleteIsFalse();
     }
 
     @Override
@@ -30,12 +30,15 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public boolean deleteSong(Integer id) {
-        return false;
+    public void deleteSong(Integer id) {
+        Song song1 = songRepository.getSongsByIdAndFlagDeleteIsFalse(id);
+        song1.setFlagDelete(true);
+        songRepository.save(song1);
     }
 
+
     @Override
-    public Song detailSong(Integer id) {
-        return songRepository.findById(id).get();
+    public Song findById(Integer id) {
+        return songRepository.getSongsByIdAndFlagDeleteIsFalse(id);
     }
 }

@@ -6,29 +6,29 @@ import javax.persistence.*;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String singer;
     private String kindOfMusic;
     @Column(name = "flag_delete",nullable = false)
-    private boolean FlagDelete;
+    private boolean flagDelete;
 
     public Song() {
     }
 
-    public Song(int id, String name, String singer, String kindOfMusic, Boolean flagDelete) {
+    public Song(Integer id, String name, String singer, String kindOfMusic, boolean flagDelete) {
         this.id = id;
         this.name = name;
         this.singer = singer;
         this.kindOfMusic = kindOfMusic;
-        FlagDelete = flagDelete;
+        this.flagDelete = flagDelete;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class Song {
         this.kindOfMusic = kindOfMusic;
     }
 
-    public Boolean getFlagDelete() {
-        return FlagDelete;
+    public boolean isFlagDelete() {
+        return flagDelete;
     }
 
-    public void setFlagDelete(Boolean flagDelete) {
-        FlagDelete = flagDelete;
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 }

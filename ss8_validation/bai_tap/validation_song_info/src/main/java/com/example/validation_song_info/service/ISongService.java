@@ -9,6 +9,8 @@ public interface ISongService {
    List<Song> display();
     void createSong(Song song);
     void editSong(Song song);
-    boolean deleteSong(Integer id);
-    Song detailSong(Integer id);
+    void deleteSong(Integer id);
+
+    Song findById(Integer id);
+
 }
