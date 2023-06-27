@@ -9,6 +9,7 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nameBlog;
+    @Column(name = "content", columnDefinition = "longtext")
     private String content;
     private String date;
     @ManyToOne
