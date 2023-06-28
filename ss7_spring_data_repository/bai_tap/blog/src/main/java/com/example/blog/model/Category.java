@@ -7,20 +7,23 @@ import java.util.List;
 @Table(name = "category")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "category")
-    private List<Blog> blogs;
 
     public Category() {
     }
 
-    public int getId() {
+    public Category(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,12 +34,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<Blog> getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
-    }
 }
+

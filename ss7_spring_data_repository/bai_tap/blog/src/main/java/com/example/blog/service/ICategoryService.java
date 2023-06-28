@@ -8,4 +8,8 @@ import java.util.List;
 public interface ICategoryService {
     List<Category> findCategory();
     void save(Category category);
+    void editCategory(Category category);
+    boolean deleteCategory(Category category);
+
+    Category findID(Integer id);
 }
