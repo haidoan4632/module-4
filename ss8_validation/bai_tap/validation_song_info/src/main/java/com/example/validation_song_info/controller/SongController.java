@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Controller
 public class SongController {
     @Autowired
-    ISongService songService;
+    private ISongService songService;
 
     @GetMapping()
     public String home(Model model) {
@@ -32,7 +32,7 @@ public class SongController {
         return "create";
     }
 
-    @PostMapping("/create1")
+    @PostMapping("/save")
     public String create(@Valid @ModelAttribute SongDto songDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "/create";
@@ -80,8 +80,7 @@ public class SongController {
             songService.editSong(songEntity);
             redirectAttributes.addFlashAttribute("msg", "cập nhật thành công");
             return "redirect:/songs";
-        }
-        else {
+        } else {
             redirectAttributes.addFlashAttribute("msg", "cập nhật thất bại");
             return "/update";
         }
