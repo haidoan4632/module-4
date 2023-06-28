@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class MainExceptionHandler extends Throwable {
     @ExceptionHandler(Exception.class)
     public String get500Page(Exception ex, Model model){
-        model.addAttribute("errorMsg",ex.getMessage());
+        model.addAttribute("errorMsg","Không còn sách để mươ");
         return "/500";
     }
 }

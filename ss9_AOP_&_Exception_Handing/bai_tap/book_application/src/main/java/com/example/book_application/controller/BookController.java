@@ -6,6 +6,7 @@ import com.example.book_application.model.Borrow;
 import com.example.book_application.service.IBookService;
 import com.example.book_application.service.IBorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}/borrow")
-    public String borrowBook(@PathVariable int id,@PathVariable int code) throws MainExceptionHandler {
+    public String borrowBook(@PathVariable int id,Model model) throws MainExceptionHandler {
         Book book = iBookService.finById(id);
         if (book.getQuantity() == 0) {
             throw new MainExceptionHandler();
@@ -57,14 +58,25 @@ public class BookController {
         return "/book/500";
     }
 
-    @GetMapping("/{code}/pay")
-    public String payForm(@PathVariable int code, int id,Model model) throws MainExceptionHandler {
-        Book book = iBookService.finById(id);
+    @GetMapping("/{id}/pay")
+    public String showPay(@PathVariable int id, Model model){
+        if (iBookService.finById(id)!=null){
+            return "pay";
+        }
+        return "redirect:/books";
+    }
+
+
+    @PostMapping("/pay")
+    public String payForm(@RequestParam Integer id, int code, Model model) throws MainExceptionHandler {
+      List<Borrow> borrowList = borrowService.getAll();
+      Book book = iBookService.finById(id);
         if (borrowService.findByCode(code) == true) {
             book.setQuantity(book.getQuantity() + 1);
             iBookService.save(book);
+            model.addAttribute("mess", "da tra sach");
+            return "redirect:/books";
         }
-        model.addAttribute("bookList", iBookService.getAll());
-        return "/list";
+ throw  new MainExceptionHandler();
     }
 }
