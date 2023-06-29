@@ -78,4 +78,7 @@ public class Cart {
         }
         return payment;
     }
+    public void clearCart(){
+        products.clear();
+    }
 }
