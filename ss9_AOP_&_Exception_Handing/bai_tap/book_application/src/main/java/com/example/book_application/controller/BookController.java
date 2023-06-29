@@ -55,7 +55,7 @@ public class BookController {
 
     @ExceptionHandler(MainExceptionHandler.class)
     public String handleException(Exception exception) {
-        return "/book/500";
+        return "/books/500";
     }
 
     @GetMapping("/{id}/pay")
@@ -71,7 +71,7 @@ public class BookController {
     public String payForm(@RequestParam Integer id, int code, Model model) throws MainExceptionHandler {
       List<Borrow> borrowList = borrowService.getAll();
       Book book = iBookService.finById(id);
-        if (borrowService.findByCode(code) == true) {
+        if (borrowService.findByCode(code)) {
             book.setQuantity(book.getQuantity() + 1);
             iBookService.save(book);
             model.addAttribute("mess", "da tra sach");
