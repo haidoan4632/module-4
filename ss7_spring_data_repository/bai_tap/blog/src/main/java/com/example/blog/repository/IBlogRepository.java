@@ -1,7 +1,7 @@
 package com.example.blog.repository;
 
 import com.example.blog.model.Blog;
-import com.example.blog.model.Category;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +14,14 @@ import org.springframework.data.domain.Pageable;
 
 @Repository
     public interface IBlogRepository extends JpaRepository<Blog, Integer> {
+    Page<Blog> findAllByFlagDeleteIsFalse(Pageable pageable);
 
-        @Query(value = "select * from blogs where blogs.flag = false", nativeQuery = true)
-        Page<Blog> findAllByIsFlag(Pageable pageable);
-        Page<Blog> findBlogByNameBlogContainsAndCategory( String nameBlog, Category category ,Pageable pageable );
+    Blog getBlogByIdAndFlagDeleteIsFalse(Integer id);
+
         @Modifying
         @Transactional
         @Query(value = "update blogs  set blogs.is_flag_delete = true where blogs.id = ?1", nativeQuery = true)
         void isDelete(Integer id);
+
+
 }

@@ -15,7 +15,7 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "category.id", nullable = false)
     private Category category;
-    private boolean isFlagDelete;
+    private boolean flagDelete;
 
     public Blog() {
     }
@@ -26,7 +26,7 @@ public class Blog {
         this.content = content;
         this.date = date;
         this.category = category;
-        this.isFlagDelete = isFlagDelete;
+        this.flagDelete = isFlagDelete;
     }
 
     public int getId() {
@@ -70,10 +70,10 @@ public class Blog {
     }
 
     public boolean isFlagDelete() {
-        return isFlagDelete;
+        return flagDelete;
     }
 
     public void setFlagDelete(boolean flagDelete) {
-        isFlagDelete = flagDelete;
+        flagDelete = flagDelete;
     }
 }

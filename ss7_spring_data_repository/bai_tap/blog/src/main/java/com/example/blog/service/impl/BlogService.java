@@ -19,7 +19,7 @@ public class BlogService implements IBlogService {
 
     @Override
     public Page<Blog> getAll(Pageable pageable) {
-        return iBlogRepository.findAll(pageable);
+        return iBlogRepository.findAllByFlagDeleteIsFalse(pageable);
     }
 
     @Override
