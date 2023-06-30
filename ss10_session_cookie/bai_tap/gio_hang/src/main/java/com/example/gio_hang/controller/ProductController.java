@@ -55,16 +55,14 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Integer id, Model model) {
-        if (productService.findById(id)!=null){
             Optional<Product> productOptional = productService.findById(id);
-            model.addAttribute("products", productOptional);
-            return "/detail";
-        }
+           if (productOptional.isPresent()) {
+               model.addAttribute("products", productOptional);
+               return "/detail";
+           }
        else {
            model.addAttribute("msg","không tìm thấy id");
            return "cart";
         }
     }
-
-
 }
