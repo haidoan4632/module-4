@@ -24,8 +24,7 @@ public class ProductController {
 
     @GetMapping("/shop")
     public ModelAndView showShop() {
-        ModelAndView modelAndView = new ModelAndView("/shop");
-        modelAndView.addObject("products", productService.findAll());
+        ModelAndView modelAndView = new ModelAndView("/shop","products",productService.findAll());
         return modelAndView;
     }
 
@@ -56,9 +55,15 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Integer id, Model model) {
-        Optional<Product> productOptional = productService.findById(id);
-        model.addAttribute("products", productOptional);
-        return "/detail";
+        if (productService.findById(id)!=null){
+            Optional<Product> productOptional = productService.findById(id);
+            model.addAttribute("products", productOptional);
+            return "/detail";
+        }
+       else {
+           model.addAttribute("msg","không tìm thấy id");
+           return "cart";
+        }
     }
 
 
