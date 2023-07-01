@@ -37,4 +37,9 @@ public class CategoryService implements ICategoryService {
         return categoryRepository.findById(id).get();
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        categoryRepository.deleteById(id);
+    }
+
 }

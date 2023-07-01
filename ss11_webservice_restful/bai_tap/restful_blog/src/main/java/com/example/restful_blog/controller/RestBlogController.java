@@ -8,51 +8,56 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
-@RequestMapping("/blog")
 @RestController
+@RequestMapping("/blog")
 public class RestBlogController {
     @Autowired
     private IBlogService blogService;
-    @Autowired
-    private ICategoryService categoryService;
 
     @GetMapping()
-    public List<Blog> getBlog() {
+    public ResponseEntity<List<Blog>> getAllBlogs() {
         List<Blog> blogs = blogService.displayBlog();
-        return this.blogService.displayBlog();
-
+        return ResponseEntity.ok(blogs);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Blog> getBlogDetail(@PathVariable Integer id) {
-        try {
-            Blog blog = this.blogService.detailBlog(id);
-            return ResponseEntity.ok(blog);
-        } catch (NoSuchElementException ex) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Blog> getBlogById(@PathVariable Integer id) {
+        Blog blog = blogService.detailBlog(id);
+        if (blog == null) {
             return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(blog);
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createBlog(@RequestBody Blog blog) {
-        this.blogService.createBlog(blog);
-
+    public ResponseEntity<Void> createBlog(@RequestBody Blog blog) {
+        blogService.createBlog(blog);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping()
-    public void updateBlog(@RequestBody Blog blog) {
-        this.blogService.editBlog(blog);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateBlog(@PathVariable Integer id, @RequestBody Blog blog) {
+        Blog existingBlog = blogService.detailBlog(id);
+        if (existingBlog == null) {
+            return ResponseEntity.notFound().build();
+        }
+        blog.setId(id);
+        blogService.editBlog(blog);
+        return ResponseEntity.ok().build();
     }
 
-    ;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBlog(@PathVariable Integer id) {
+        Blog existingBlog = blogService.detailBlog(id);
+        if (existingBlog == null) {
+            return ResponseEntity.notFound().build();
+        }
+        blogService.deleteBlog(id);
+        return ResponseEntity.noContent().build();
+    }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
-        this.blogService.deleteBlog(id);
+    private boolean isBlogExist(Integer id) {
+        return blogService.detailBlog(id) != null;
     }
 }

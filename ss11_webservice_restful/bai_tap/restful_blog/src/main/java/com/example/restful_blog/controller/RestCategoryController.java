@@ -8,47 +8,55 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-@RequestMapping("/category")
 @RestController
+@RequestMapping("/category")
 public class RestCategoryController {
     @Autowired
     private ICategoryService categoryService;
 
     @GetMapping()
-    public List<Category> getCategory() {
+    public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.displayCategory();
-        return this.categoryService.displayCategory();
-
+        return ResponseEntity.ok(categories);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Category> getCategoryDetail(@PathVariable Integer id) {
-        try {
-            Category category = this.categoryService.detailCategory(id);
-            return ResponseEntity.ok(category);
-        } catch (NoSuchElementException ex) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> getCategoryById(@PathVariable Integer id) {
+        Category category = categoryService.detailCategory(id);
+        if (category == null) {
             return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(category);
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createCategory(@RequestBody Category category) {
-        this.categoryService.createCategory(category);
-
+    public ResponseEntity<Void> createCategory(@RequestBody Category category) {
+        categoryService.createCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping()
-    public void updateCategory(@RequestBody Category category) {
-        this.categoryService.editCategory(category);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateCategory(@PathVariable Integer id, @RequestBody Category category) {
+        Category existingCategory = categoryService.detailCategory(id);
+        if (existingCategory == null) {
+            return ResponseEntity.notFound().build();
+        }
+        category.setId(id);
+        categoryService.editCategory(category);
+        return ResponseEntity.ok().build();
     }
 
-    ;
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id) {
-        this.categoryService.detailCategory(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+        Category existingCategory = categoryService.detailCategory(id);
+        if (existingCategory == null) {
+            return ResponseEntity.notFound().build();
+        }
+        categoryService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
+    private boolean isCategoryExist(Integer id) {
+        return categoryService.detailCategory(id) != null;
+    }
 }
