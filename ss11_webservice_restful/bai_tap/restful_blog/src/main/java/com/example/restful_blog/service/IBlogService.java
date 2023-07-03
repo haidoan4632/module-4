@@ -14,5 +14,7 @@ public interface IBlogService {
     void editBlog(Blog blog);
     Blog detailBlog(Integer id);
     void deleteBlog(Integer id);
+    Page<Blog> getPage(Pageable pageable);
 
+    List<Blog> findByName(String name);
 }

@@ -6,6 +6,8 @@ import com.example.restful_blog.repository.IBlogRepository;
 import com.example.restful_blog.service.IBlogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +43,15 @@ public class BlogService implements IBlogService {
         Blog blog1 = blogRepository.getBlogByIdAndFlagDeleteIsFalse(id);
         blog1.setFlagDelete(true);
         blogRepository.save(blog1);
+    }
+
+    @Override
+    public Page<Blog> getPage(Pageable pageable) {
+        return this.blogRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Blog> findByName(String name) {
+        return this.blogRepository.findAllByNameBlogContainingAndFlagDeleteIsFalse(name);
     }
 }
