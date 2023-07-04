@@ -84,5 +84,5 @@ public class BlogController {
             redirectAttributes.addFlashAttribute("mess", "Xóa không thành công. ");
             return "redirect:/blogs";
         }
-    }
+    }z
 }
